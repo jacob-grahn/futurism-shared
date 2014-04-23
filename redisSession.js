@@ -154,7 +154,7 @@ redisSession.destroy = function(token, callback) {
  * @returns {string} token
  */
 redisSession.createToken = function(userId) {
-    return userId + '-' + randomString(32);
+    return userId + '-' + randomString.generate(32);
 };
 
 
