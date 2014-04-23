@@ -2,7 +2,7 @@
 
 var _ = require('lodash');
 var randomString = require('randomstring');
-var redisConnect = require('redisConnect');
+var redisConnect = require('./redisConnect');
 var sessionLife = 60*60; //one hour
 var client;
 var redisSession = {};
