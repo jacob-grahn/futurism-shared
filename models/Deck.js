@@ -3,7 +3,7 @@
 var mongoose = require("mongoose");
 var validate = require('mongoose-validator').validate;
 var sanitize = require('validator').sanitize;
-
+var Card = require('./Card'); // makes sure Card is loaded first
 
 var DeckSchema = new mongoose.Schema({
     _id: {
