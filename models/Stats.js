@@ -1,4 +1,7 @@
 var mongoose = require('mongoose');
+var futures = require('../futures');
+var _ = require('lodash');
+
 
 var StatsSchema = new mongoose.Schema({
     _id: {
@@ -21,11 +24,34 @@ var StatsSchema = new mongoose.Schema({
         min: 0,
         default: 5
     },
+    futures: {
+        type: Array,
+        default: []
+    },
     updated: {
         type: Date,
         default: Date.now
     }
 });
 
+
+StatsSchema.pre('save', function (next) {
+    if(!_.isArray(this.futures)) {
+        this.futures = [];
+    }
+    this.futures = _.filter(this.futures, isValidFuture);
+    this.futures = _.unique(this.futures);
+    next();
+});
+
+var isValidFuture = function(futureId) {
+    var arr = _.toArray(futures);
+    var isValid = arr.indexOf(futureId) !== -1;
+    return isValid;
+};
+
+
 var Stats = mongoose.model('Stats', StatsSchema);
+
+
 module.exports = Stats;

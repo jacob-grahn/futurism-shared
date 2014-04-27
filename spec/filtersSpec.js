@@ -1,8 +1,8 @@
 describe('filters', function() {
 	'use strict';
 
-	var filters = require('../../../shared/filters');
-	var Board = require('../../../shared/Board');
+	var filters = require('../filters');
+	var Board = require('../Board');
 	var _ = require('lodash');
 
 	// players

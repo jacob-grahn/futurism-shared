@@ -1,7 +1,7 @@
 describe('deckFns', function() {
 
-	var deckFns = require('../../../shared/deckFns');
-	var cardFns = require('../../../shared/cardFns');
+	var deckFns = require('../deckFns');
+	var cardFns = require('../cardFns');
 
 
 	it('should tally a deck pride', function() {

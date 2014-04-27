@@ -1,0 +1,14 @@
+{
+  "name": "futurism-shared",
+  "description": "code shared by futurism-client, futurism-http, and futurism-multi",
+  "version": "0.1.0",
+  "private": false,
+  "scripts": {
+    "test": "jasmine-node spec --autotest --color --watch --captureExceptions *.js models"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "lodash": "~2.4.1",
+    "mongoose": "~3.8.8"
+  }
+}
