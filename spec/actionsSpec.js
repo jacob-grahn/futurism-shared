@@ -144,7 +144,7 @@ describe('shared/actions', function() {
 				player: player1
 			};
 			player1.pride = 9;
-			target(1,1,0).card = {commander: true, abilities: ['smmn']}
+			target(1,1,0).card = {commander: true, abilities: ['smmn']};
 			actions.smmn.use(target(1,1,0), handTarget, target(1,0,0));
 			expect(target(1,0,0).card).toBe(strongCard);
 		});
@@ -209,7 +209,7 @@ describe('shared/actions', function() {
 		expect(target(1,3,0).card).toBeFalsy();
 		expect(target(1,0,0).card.health).toBe(10);
 		expect(target(1,0,0).card.attack).toBe(10);
-		expect(target(1,0,0).card.abilities).toContain('abom', 'tree', 'prci')
+		expect(target(1,0,0).card.abilities).toContain('abom', 'tree', 'prci');
 	});
 
 
@@ -324,11 +324,13 @@ describe('shared/actions', function() {
 	describe('sduc', function() {
 
 		it('should pull a card into your control', function() {
-			target(1,1,0).card = strongCard;
-			target(2,0,0).card = weakCard;
+            var card = {moves: 2};
+			target(1,1,0).card = {};
+			target(2,0,0).card = card;
 			actions.sduc.use(target(1,1,0), target(2,0,0), target(1,0,0));
 			expect(target(2,0,0).card).toBeFalsy();
-			expect(target(1,0,0).card).toBe(weakCard);
+			expect(target(1,0,0).card).toBe(card);
+			expect(target(1,0,0).card.moves).toBe(0);
 		});
 	});
 

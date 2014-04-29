@@ -1,3 +1,5 @@
+/* global window */
+
 (function() {
 	'use strict';
 
@@ -24,7 +26,7 @@
 		target1.card.moves -= 1;
 
 		var parent = src.card;
-		if(Math.random() > .5) {
+		if(Math.random() > 0.5) {
 			parent = target1.card;
 		}
 
@@ -99,7 +101,7 @@
 			targetAttack: targetAttack,
 			srcDamage: srcDamage,
 			targetDamage: targetDamage
-		}
+		};
 	};
 
 
@@ -253,7 +255,7 @@
 					attack: 0,
 					health: 1,
 					moves: 0
-				}
+				};
 			}
 		},
 
@@ -306,8 +308,7 @@
 						filters.enemy(
 							board.allTargets(), src.player
 						)
-					)
-				, src.player, board);
+					), src.player, board);
 				if(possibleTargets.length === 0) {
 					return {err: 'no targets'};
 				}
@@ -462,6 +463,7 @@
 			use: function(src, target, target2) {
 				src.card.health--;
 				target2.card = target.card;
+                target2.card.moves = 0;
 				target.card = null;
 			}
 		},
@@ -499,7 +501,7 @@
 					if(target.card && target.card.commander) {
 						target.card.moves++;
 					}
-				})
+				});
 			}
 		},
 
