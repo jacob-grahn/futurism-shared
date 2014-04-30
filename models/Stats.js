@@ -1,3 +1,5 @@
+'use strict';
+
 var mongoose = require('mongoose');
 var futures = require('../futures');
 var _ = require('lodash');
@@ -31,8 +33,19 @@ var StatsSchema = new mongoose.Schema({
     updated: {
         type: Date,
         default: Date.now
+    },
+    matchTimes: {
+        type: [Date],
+        default: []
     }
 });
+
+
+var isValidFuture = function(futureId) {
+    var arr = _.toArray(futures);
+    var isValid = arr.indexOf(futureId) !== -1;
+    return isValid;
+};
 
 
 StatsSchema.pre('save', function (next) {
@@ -44,14 +57,6 @@ StatsSchema.pre('save', function (next) {
     next();
 });
 
-var isValidFuture = function(futureId) {
-    var arr = _.toArray(futures);
-    var isValid = arr.indexOf(futureId) !== -1;
-    return isValid;
-};
-
 
 var Stats = mongoose.model('Stats', StatsSchema);
-
-
 module.exports = Stats;
