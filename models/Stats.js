@@ -28,7 +28,7 @@ var StatsSchema = new mongoose.Schema({
     },
     futures: {
         type: Array,
-        default: []
+        default: ['norm']
     },
     updated: {
         type: Date,
