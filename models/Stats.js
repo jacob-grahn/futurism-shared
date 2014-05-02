@@ -24,7 +24,7 @@ var StatsSchema = new mongoose.Schema({
     fractures: {
         type: Number,
         min: 0,
-        default: 5
+        default: 0
     },
     futures: {
         type: Array,

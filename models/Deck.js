@@ -36,6 +36,9 @@ var DeckSchema = new mongoose.Schema({
     updated: {
         type: Date,
         default: Date.now
+    },
+    canon: {
+        type: Boolean
     }
 });
 
