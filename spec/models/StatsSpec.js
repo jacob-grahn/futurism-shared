@@ -24,10 +24,10 @@ describe('model/Stats', function() {
     describe('futures', function() {
         
         
-        it('should default to an empty array', function(done) {
+        it('should default to ["norm"]', function(done) {
             stats.save(function(err) {
                 expect(err).toBe(null);
-                expect(stats.toObject().futures).toEqual([]);
+                expect(stats.toObject().futures).toEqual(['norm']);
                 done();
             });
         });

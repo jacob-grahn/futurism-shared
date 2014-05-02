@@ -79,32 +79,42 @@ describe('shared/actions', function() {
 	// global
 	//////////////////////////////////////////////////////////////////////////////////
 
-	it('attack should trade blows with another card', function() {
-		var target1 = {
-			card: {
-				health: 1000,
-				attack: 1
-			}
-		};
-		var target2 = {
-			card: {
-				health: 1000,
-				attack: 3
-			}
-		};
+    describe('attack', function() {
+        
+        it('attack should trade blows with another card', function() {
+            var target1 = {
+                card: {
+                    health: 1000,
+                    attack: 1
+                }
+            };
+            var target2 = {
+                card: {
+                    health: 1000,
+                    attack: 3
+                }
+            };
 
-		_.times(100, function() {
-			actions.prci.use(target1, target2);
-		});
+            _.times(100, function() {
+                actions.prci.use(target1, target2);
+            });
 
-		var expectedHealth1 = 1000 - (3 * 100 * 0.66);
-		expect(target1.card.health).toBeGreaterThan(expectedHealth1 * 0.9);
-		expect(target1.card.health).toBeLessThan(expectedHealth1 * 1.1);
+            var expectedHealth1 = 1000 - (3 * 100 * 0.66);
+            expect(target1.card.health).toBeGreaterThan(expectedHealth1 * 0.9);
+            expect(target1.card.health).toBeLessThan(expectedHealth1 * 1.1);
 
-		var expectedHealth2 = 1000 - (1 * 100 * 0.66);
-		expect(target2.card.health).toBeGreaterThan(expectedHealth2 * 0.9);
-		expect(target2.card.health).toBeLessThan(expectedHealth2 * 1.1);
-	});
+            var expectedHealth2 = 1000 - (1 * 100 * 0.66);
+            expect(target2.card.health).toBeGreaterThan(expectedHealth2 * 0.9);
+            expect(target2.card.health).toBeLessThan(expectedHealth2 * 1.1);
+        });
+        
+        it('should fail if src.card.peaceful > 1', function() {
+            var src = {card: {peaceful: 1}};
+            var target = {};
+            var result = actions.prci.use(src, target);
+            expect(result.err).toBeTruthy();
+        });
+    });
 
 
 	it('move should move a card to an empty owned target', function() {
@@ -213,18 +223,18 @@ describe('shared/actions', function() {
 	});
 
 
-	it('peap should mark a card as tired', function() {
-		strongCard.moves = 1;
-		target(1,0,0).card = weakCard;
+	it('peap should mark a card as peaceful', function() {
+		strongCard.peaceful = 0;
 		target(2,0,0).card = strongCard;
-		actions.peap.use(target(1,0,0), target(2,0,0));
-		expect(target(2,0,0).card.moves).toBe(0);
+		actions.peap.use({}, target(2,0,0));
+		expect(target(2,0,0).card.peaceful).toBe(1);
 	});
 
 
 	describe('bees', function() {
 		it('should hurt a random enemy', function() {
 			target(1,0,0).card = strongCard;
+            target(2,0,0).card = weakCard;
 			actions.bees.use(board.target(2,0,0), board);
 			expect(target(1,0,0).card.health).toBe(8);
 		});

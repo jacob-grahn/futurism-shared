@@ -57,6 +57,11 @@
 		options = options || {};
 		options.counterAttack = options.counterAttack || false;
 		options.alwaysHit = options.alwaysHit || false;
+        
+        // peaceful
+        if(src.card.peaceful > 0) {
+            return {err: 'This card feels too peaceful to attack!'};
+        }
 
 
 		// calc attack force
@@ -213,6 +218,9 @@
 			],
 			use: function(src, target) {
 				var result = attack(src, target, {counterAttack: true});
+                if(result.err) {
+                    return result;
+                }
 				result.srcHeal = Math.round(result.targetDamage / 2);
 				src.card.health += result.srcHeal;
 				return result;
@@ -289,7 +297,7 @@
 				[filters.enemy, filters.full, filters.front]
 			],
 			use: function(src, target) {
-				target.card.moves--;
+				target.card.peaceful = 1;
 			}
 		},
 
@@ -303,6 +311,9 @@
 				[filters.owned]
 			],
 			use: function(src, board) {
+                if(src.card.peaceful > 0) {
+                    return({err: 'This card feels too peaceful to attack!'});
+                }
 				var possibleTargets = filters.hero(
 					filters.full(
 						filters.enemy(
