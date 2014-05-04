@@ -16,6 +16,9 @@ var lobbySchema = new mongoose.Schema({
     },
     minElo: {
         type: Number
+    },
+    minFame: {
+        type: Number
     }
 });
 

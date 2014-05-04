@@ -1,3 +1,5 @@
+/* global window */
+
 (function() {
 	'use strict';
 
@@ -24,7 +26,7 @@
 		target1.card.moves -= 1;
 
 		var parent = src.card;
-		if(Math.random() > .5) {
+		if(Math.random() > 0.5) {
 			parent = target1.card;
 		}
 
@@ -55,6 +57,11 @@
 		options = options || {};
 		options.counterAttack = options.counterAttack || false;
 		options.alwaysHit = options.alwaysHit || false;
+        
+        // peaceful
+        if(src.card.peaceful > 0) {
+            return {err: 'This card feels too peaceful to attack!'};
+        }
 
 
 		// calc attack force
@@ -99,7 +106,7 @@
 			targetAttack: targetAttack,
 			srcDamage: srcDamage,
 			targetDamage: targetDamage
-		}
+		};
 	};
 
 
@@ -211,6 +218,9 @@
 			],
 			use: function(src, target) {
 				var result = attack(src, target, {counterAttack: true});
+                if(result.err) {
+                    return result;
+                }
 				result.srcHeal = Math.round(result.targetDamage / 2);
 				src.card.health += result.srcHeal;
 				return result;
@@ -253,7 +263,7 @@
 					attack: 0,
 					health: 1,
 					moves: 0
-				}
+				};
 			}
 		},
 
@@ -287,7 +297,7 @@
 				[filters.enemy, filters.full, filters.front]
 			],
 			use: function(src, target) {
-				target.card.moves--;
+				target.card.peaceful = 1;
 			}
 		},
 
@@ -301,13 +311,15 @@
 				[filters.owned]
 			],
 			use: function(src, board) {
+                if(src.card.peaceful > 0) {
+                    return({err: 'This card feels too peaceful to attack!'});
+                }
 				var possibleTargets = filters.hero(
 					filters.full(
 						filters.enemy(
 							board.allTargets(), src.player
 						)
-					)
-				, src.player, board);
+					), src.player, board);
 				if(possibleTargets.length === 0) {
 					return {err: 'no targets'};
 				}
@@ -462,6 +474,7 @@
 			use: function(src, target, target2) {
 				src.card.health--;
 				target2.card = target.card;
+                target2.card.moves = 0;
 				target.card = null;
 			}
 		},
@@ -499,7 +512,7 @@
 					if(target.card && target.card.commander) {
 						target.card.moves++;
 					}
-				})
+				});
 			}
 		},
 
