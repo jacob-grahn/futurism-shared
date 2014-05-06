@@ -297,7 +297,9 @@
 				[filters.enemy, filters.full, filters.front]
 			],
 			use: function(src, target) {
-				target.card.peaceful = 1;
+                //if(Math.random() <= .66) {
+				    target.card.peaceful = 1;
+                //}
 			}
 		},
 
@@ -403,7 +405,7 @@
 		rech: {
 			restrict: [
 				[filters.owned],
-				[filters.friend, filters.full, filters.notSelf]
+				[filters.friend, filters.full, filters.notSelf, filters.machine]
 			],
 			use: function(src, target) {
 				target.card.moves++;
@@ -417,7 +419,7 @@
 		netw: {
 			restrict: [
 				[filters.owned],
-				[filters.friend, filters.full, filters.notSelf]
+				[filters.friend, filters.full, filters.notSelf, filters.machine]
 			],
 			use: function(src, target) {
 				src.card.abilities = _.uniq(src.card.abilities.concat(target.card.abilities));

@@ -44,6 +44,13 @@
 			return target.card && target.card.moves > 0;
 		});
 	};
+    
+    
+    filters.machine = function(targets) {
+		return _.filter(targets, function(target) {
+			return target.faction === 'mc';
+		});
+	};
 
 
 	filters.notSelf = function(targets, me, board, targetChain) {
