@@ -48,7 +48,7 @@
     
     filters.machine = function(targets) {
 		return _.filter(targets, function(target) {
-			return target.faction === 'mc';
+			return target.card && target.card.faction === 'mc';
 		});
 	};
 
