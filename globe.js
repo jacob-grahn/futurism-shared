@@ -27,7 +27,12 @@ var globe = {
                 return callback('no reply from globe');
             }
 
-            body = JSON.parse(body);
+            try {
+                body = JSON.parse(body);
+            }
+            catch(err) {
+                return callback('globe error: ' + body);
+            }
 
             if(body.error) {
                 return callback('globe error: ' + JSON.stringify(body));
