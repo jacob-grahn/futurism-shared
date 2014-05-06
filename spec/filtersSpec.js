@@ -352,6 +352,24 @@ describe('filters', function() {
 		expect(results.length).toBe(1);
 		expect(results[0].card.cid).toBe(1);
 	});
+    
+    
+    describe('machine', function() {
+       
+        it('should find machines', function() {
+            var targets = [
+				{card: {
+					faction: 'mc'
+				}},
+				{card: {
+					faction: 'en'
+				}}
+			];
+			var machineTargets = filters.machine(targets);
+			expect(machineTargets.length).toBe(1);
+			expect(machineTargets[0].card.faction).toBe('mc');
+        });
+    });
 
 
 	describe('weak', function() {
