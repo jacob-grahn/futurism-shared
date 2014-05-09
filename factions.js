@@ -60,7 +60,6 @@
 			{id: 'male'},
 			{id: 'feml'},
 			{id: 'btle'},
-			{id: 'detr'},
 			{id: 'hero'},
 			{id: 'serm'}
 		]

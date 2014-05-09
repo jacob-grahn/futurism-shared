@@ -646,20 +646,6 @@
 			}
 		},
 
-		/**
-		 * Determined: Sacrifice this card to defeat any enemy
-		 */
-		DETERMINED: 'detr',
-		detr: {
-			restrict: [
-				[filters.owned],
-				[filters.enemy, filters.front]
-			],
-			use: function(src, target) {
-				src.card.health = 0;
-				target.card.health = 0;
-			}
-		},
 
 		/**
 		 * Sacrifice: All enemy attacks must target this card for one turn.
