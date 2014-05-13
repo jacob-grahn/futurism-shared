@@ -37,6 +37,18 @@ var StatsSchema = new mongoose.Schema({
     matchTimes: {
         type: [Date],
         default: []
+    },
+    favDecks: {
+        type: [mongoose.Schema.Types.ObjectId],
+        validate: function(arr, next) {
+            return next(arr.length < 100);
+        }
+    },
+    favCards: {
+        type: [mongoose.Schema.Types.ObjectId],
+        validate: function(arr, next) {
+            return next(arr.length < 100);
+        }
     }
 });
 
