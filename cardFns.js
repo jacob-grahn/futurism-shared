@@ -12,7 +12,7 @@
 			card.name = '';
 			card.attack = 1;
 			card.health = 1;
-			card.pride = 1;
+			card.pride = 2;
 			card.abilities = [];
 			card.story = '';
 			card.faction = 'en';
