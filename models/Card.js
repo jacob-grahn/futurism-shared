@@ -32,10 +32,8 @@ var CardSchema = new mongoose.Schema({
         index: true,
         validate: validate('len', 1, 100)
     },
-    canon: {
-        type: Boolean,
-        index: true,
-        default: false
+    share: {
+        type: Boolean
     },
     userId: {
         type: mongoose.Schema.Types.ObjectId,

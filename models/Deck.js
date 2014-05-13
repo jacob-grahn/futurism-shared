@@ -37,7 +37,7 @@ var DeckSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
     },
-    canon: {
+    share: {
         type: Boolean
     }
 });
