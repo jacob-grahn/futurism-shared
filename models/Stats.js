@@ -39,7 +39,7 @@ var StatsSchema = new mongoose.Schema({
         default: []
     },
     favDecks: {
-        type: [mongoose.Schema.Types.ObjectId],
+        type: [String],
         validate: function(arr, next) {
             return next(arr.length < 100);
         },
