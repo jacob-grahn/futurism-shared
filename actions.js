@@ -180,6 +180,9 @@
 				_.pull(src.player.hand, target1.card);
 				target2.card = target1.card;
 				target1.card.moves = 0;
+                if(target1.card.commander) {
+                    target1.card.moves = 1;
+                }
 			}
 		},
 
@@ -297,9 +300,7 @@
 				[filters.enemy, filters.full, filters.front]
 			],
 			use: function(src, target) {
-                //if(Math.random() <= .66) {
-				    target.card.peaceful = 1;
-                //}
+                target.card.peaceful = 1;
 			}
 		},
 
