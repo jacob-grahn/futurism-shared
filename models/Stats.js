@@ -34,10 +34,6 @@ var StatsSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
     },
-    matchTimes: {
-        type: [Date],
-        default: []
-    },
     favDecks: {
         type: [String],
         validate: function(arr, next) {
