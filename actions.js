@@ -180,7 +180,7 @@
 				_.pull(src.player.hand, target1.card);
 				target2.card = target1.card;
 				target1.card.moves = 0;
-                if(target1.card.commander) {
+                if(target1.card.commander && target1.card.returned) {
                     target1.card.moves = 1;
                 }
 			}
@@ -552,6 +552,7 @@
 			use: function(src, target) {
 				var card = target.card;
 				target.card = null;
+                card.returned = true;
 				target.player.hand.push(card);
 
 				var card2 = src.card;
