@@ -1,7 +1,7 @@
 describe('deckFns', function() {
-
+    'use strict';
+    
 	var deckFns = require('../deckFns');
-	var cardFns = require('../cardFns');
 
 
 	it('should tally a deck pride', function() {

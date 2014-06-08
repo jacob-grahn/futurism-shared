@@ -5,7 +5,26 @@ var futures = require('../futures');
 var _ = require('lodash');
 
 
-var StatsSchema = new mongoose.Schema({
+var validateLoyalty = function(obj) {
+    if(!_.isObject(obj)) {
+        return false;
+    }
+    
+    var allValid = true;
+    _.each(obj, function(val, key) {
+        if(!_.isNumber(val) || val <= 0 || val > 5) {
+            allValid = false;
+        }
+        if(!_.isString(key) || key.length === 0 || key.length > 99) {
+            allValid = false;
+        }
+    });
+    
+    return allValid;
+};
+
+
+var ProgressSchema = new mongoose.Schema({
     _id: {
         type: mongoose.Schema.Types.ObjectId,
         index: true
@@ -47,6 +66,11 @@ var StatsSchema = new mongoose.Schema({
             return next(arr.length < 100);
         },
         default: []
+    },
+    loyalty: {
+        type: Object,
+        validate: validateLoyalty,
+        default: {}
     }
 });
 
@@ -58,7 +82,7 @@ var isValidFuture = function(futureId) {
 };
 
 
-StatsSchema.pre('save', function (next) {
+ProgressSchema.pre('save', function (next) {
     if(!_.isArray(this.futures)) {
         this.futures = [];
     }
@@ -68,5 +92,5 @@ StatsSchema.pre('save', function (next) {
 });
 
 
-var Stats = mongoose.model('Stats', StatsSchema);
-module.exports = Stats;
+var Progress = mongoose.model('Progress', ProgressSchema);
+module.exports = Progress;

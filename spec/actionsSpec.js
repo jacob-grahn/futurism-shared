@@ -499,15 +499,6 @@ describe('shared/actions', function() {
 	});
 
 
-	it('detr should take out any enemy while assuring defeat', function() {
-		target(1,0,0).card = weakCard;
-		target(2,0,0).card = strongCard;
-		actions.detr.use(target(1,0,0), target(2,0,0));
-		expect(target(1,0,0).card.health).toBe(0);
-		expect(target(2,0,0).card.health).toBe(0);
-	});
-
-
 	it('hero should mark a card as the only available target', function() {
 		var card = {
 			hero: 0
